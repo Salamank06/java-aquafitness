@@ -1,57 +1,45 @@
-public class ClaseNatacion {
-    
-    // ATRIBUTOS
-    private String codigoClase;       
-    private String nivel;             
-    private String instructor;        
-    private int cuposDisponibles;     
-    private double precioMensual;     
-    private boolean esActiva;         
-    
-    // CONSTRUCTOR
-    public ClaseNatacion(String codigoClase, String nivel, String instructor, int cuposDisponibles, double precioMensual) {
-        this.codigoClase = codigoClase;
-        this.nivel = nivel;
-        this.instructor = instructor;
-        this.cuposDisponibles = cuposDisponibles;
-        this.precioMensual = precioMensual;
-        this.esActiva = true; 
-    }
-    
-    // MÉTODOS
-    
-    public void mostrarDetalles() {
-        System.out.println("\n*** DETALLE DE CLASE ***");
-        System.out.println(" Código: " + codigoClase + " (" + nivel + ")");
-        System.out.println(" Instructor: " + instructor);
-        System.out.println(" Cupos Restantes: " + cuposDisponibles);
-        System.out.printf(" Precio/Mes: $%.2f%n", precioMensual);
-        System.out.println(" Estado: " + (esActiva ? "ACTIVA" : "INACTIVA"));
-    }
-    
-    public double calcularIngresoMaximo() {
-        int cuposMaximos = 12; 
-        int cuposOcupados = cuposMaximos - cuposDisponibles;
-        return cuposOcupados * precioMensual;
-    }
-    
-    public String getInstructor() {
-        return instructor;
-    }
-    
-    public void setEsActiva(boolean activa) {
-        this.esActiva = activa;
-        System.out.println("-> La clase " + codigoClase + " ha sido marcada como " + (activa ? "ACTIVA" : "INACTIVA") + ".");
+public class CursoCocina {
+    // ====== Atributos (mínimo 5) ======
+    private String codigoCurso;
+    private String nombreCurso;
+    private String chefInstructor;
+    private int duracionHoras;
+    private double precioPorHora;
+    private boolean disponible;
+
+    // ====== Constructor ======
+    public CursoCocina(String codigoCurso, String nombreCurso, String chefInstructor, int duracionHoras, double precioPorHora) {
+        this.codigoCurso = codigoCurso;
+        this.nombreCurso = nombreCurso;
+        this.chefInstructor = chefInstructor;
+        this.duracionHoras = duracionHoras;
+        this.precioPorHora = precioPorHora;
+        this.disponible = true; // Por defecto el curso está disponible
     }
 
-    public boolean inscribirEstudiante() {
-        if (esActiva && cuposDisponibles > 0) {
-            cuposDisponibles--;
-            System.out.println("-> Estudiante inscrito. Cupos restantes: " + cuposDisponibles);
-            return true;
-        } else {
-            System.out.println("-> INSCRIPCIÓN FALLIDA: La clase no está activa o no tiene cupos.");
-            return false;
-        }
+    // ====== Método void: imprime información ======
+    public void mostrarInformacion() {
+        System.out.println("=== CURSO DE COCINA ===");
+        System.out.println("Código: " + codigoCurso);
+        System.out.println("Nombre: " + nombreCurso);
+        System.out.println("Chef Instructor: " + chefInstructor);
+        System.out.println("Duración: " + duracionHoras + " horas");
+        System.out.println("Precio por hora: $" + precioPorHora);
+        System.out.println("Estado: " + (disponible ? "Disponible" : "No disponible"));
+    }
+
+    // ====== Método que retorna un valor calculado ======
+    public double calcularCostoTotal() {
+        return duracionHoras * precioPorHora;
+    }
+
+    // ====== Getter ======
+    public String getCodigoCurso() {
+        return codigoCurso;
+    }
+
+    // ====== Setter ======
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
     }
 }
